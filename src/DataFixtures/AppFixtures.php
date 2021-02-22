@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Statistic;
 use App\Entity\Teachr;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -19,6 +20,9 @@ class AppFixtures extends Fixture
                 ->setCreatedAt($faker->dateTimeThisMonth());
             $manager->persist($teachr);
         }
+        $count = new Statistic();
+        $count->setCount(10);
+        $manager->persist($count);
 
         $manager->flush();
     }

@@ -3,6 +3,7 @@
 namespace App\DataPersister;
 
 use ApiPlatform\Core\DataPersister\DataPersisterInterface;
+use App\Entity\Statistic;
 use App\Entity\Teachr;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
@@ -24,6 +25,9 @@ class PostPersister implements DataPersisterInterface
     {
         $data->setCreatedAt(new \DateTime());
         $this->entityManagerInterface->persist($data);
+        $count = $this->entityManagerInterface->getRepository(Statistic::class)->findOneBy([], ['id' => 'DESC']);
+        $count->setCount($count->getCount() + 1);
+        $this->entityManagerInterface->persist($count);
         $this->entityManagerInterface->flush();
     }
 
