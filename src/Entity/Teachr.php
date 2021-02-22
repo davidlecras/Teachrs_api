@@ -2,11 +2,17 @@
 
 namespace App\Entity;
 
-use App\Repository\TeachrRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\TeachrRepository;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=TeachrRepository::class)
+ * @UniqueEntity("id")
+ * @ApiResource(
+ *      itemOperations= {"get", "put"}
+ * )
  */
 class Teachr
 {
