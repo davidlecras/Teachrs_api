@@ -1,4 +1,6 @@
 api_platform:
+    title: 'API TEACHRS'
+    description: 'API test technique février 2021'
     mapping:
         paths: ['%kernel.project_dir%/src/Entity']
     patch_formats:
