@@ -26,7 +26,13 @@ class PostPersister implements DataPersisterInterface
         $data->setCreatedAt(new \DateTime());
         $this->entityManagerInterface->persist($data);
         $count = $this->entityManagerInterface->getRepository(Statistic::class)->findOneBy([], ['id' => 'DESC']);
-        $count->setCount($count->getCount() + 1);
+        if (!$count) {
+            $count = new Statistic();
+            $count->setCount(1);
+        } else {
+            $count->setCount($count->getCount() + 1);
+        }
+
         $this->entityManagerInterface->persist($count);
         $this->entityManagerInterface->flush();
     }
